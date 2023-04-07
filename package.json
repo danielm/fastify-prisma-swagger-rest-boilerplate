@@ -1,0 +1,39 @@
+{
+  "name": "fastify-prisma-swagger-rest-boilerplate",
+  "version": "0.0.1",
+  "description": "Starting template to build Rest APIs, using Fastify, PrimsaJS and TypeScript. Provinding SwaggerUI for docs. Also, Blazingly fast (breh!)",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "test": "jest test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielm/fastify-prisma-swagger-rest-boilerplate.git"
+  },
+  "keywords": [
+    "node",
+    "fastify",
+    "prisma",
+    "typescript",
+    "swagger",
+    "jest",
+    "boilerplate",
+    "recipe",
+    "javascript"
+  ],
+  "author": "Daniel Morales <daniel85mg@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danielm/fastify-prisma-swagger-rest-boilerplate/issues"
+  },
+  "homepage": "https://github.com/danielm/fastify-prisma-swagger-rest-boilerplate",
+  "dependencies": {
+    "fastify": "^4.15.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "typescript": "^5.0.3"
+  }
+}
