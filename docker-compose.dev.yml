@@ -15,9 +15,11 @@ services:
       - "${APP_PORT}:${APP_PORT}"
     volumes:
       - .:/app
-    # networks:
-    #   - proxy
+#     networks:
+#       - proxy
 
 # networks:
 #   proxy:
+#     name: traefik-proxy
+#     external: true
 
