@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  web:
+    build:
+      target: development
+    command: npm run dev
+    labels:
+      - "traefik.http.routers.${PROJECT_NAME}.entrypoints=web"
+    ports:
+      # Note: When using traefik no need to use this, even locally.
+      # The reason is that it will get auto mapped from exposed ports..
+      # .. and traefik just picks it up like magic
+      # (but we need to set the network correclty, see bellow)
+      - "${APP_PORT}:${APP_PORT}"
+    volumes:
+      - .:/app
+    # networks:
+    #   - proxy
+
+# networks:
+#   proxy:
+

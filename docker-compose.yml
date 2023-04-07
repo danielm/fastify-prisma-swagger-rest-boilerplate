@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: ./
+    restart: unless-stopped
+    container_name: ${PROJECT_NAME}-${NODE_ENV:-development}
+    expose:
+      - "${APP_PORT:-5000}"
+    env_file:
+      - ./.env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${PROJECT_NAME}.rule=Host(`${APP_SERVER_NAME}`)"
+
