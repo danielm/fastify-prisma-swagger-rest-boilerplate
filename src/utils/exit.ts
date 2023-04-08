@@ -4,10 +4,10 @@ import { FastifyInstance } from 'fastify';
  * Handler for exit
  */
 const exitHandler = (app: FastifyInstance, exitCode: number) => {
-  app.log.info('Closing server...')
-  app.close()
-
-  process.exit(exitCode)
+  app.close(() => {
+    app.log.info('Server closed')
+    process.exit(exitCode)
+  })
 };
 
 /**
