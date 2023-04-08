@@ -1,7 +1,7 @@
 import fastify from 'fastify'
 import fastifyEnv from '@fastify/env';
 
-import config from './config';
+import config from './lib/config.schema';
 
 const main = async () => {
   const app = fastify({ logger: true });
