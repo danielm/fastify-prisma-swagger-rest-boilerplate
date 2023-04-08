@@ -1,4 +1,4 @@
-# To develop as a container
+# ---------------- To develop as a container
 FROM node:lts-alpine as development
 
 WORKDIR /app
@@ -9,9 +9,7 @@ RUN npm install
 
 COPY . .
 
-RUN npm install -g nodemon
-
-# Build Prod Stage
+# ---------------- Build Prod Stage
 FROM node:lts-alpine as build
 
 WORKDIR /app
@@ -24,7 +22,7 @@ COPY . .
 
 RUN npm run build
 
-# Run Prod Stage
+# ---------------- Run Prod Stage
 FROM node:lts-alpine as production
 
 WORKDIR /app
@@ -38,6 +36,4 @@ RUN npm install --production --no-audit --no-save --no-optional --no-fund --no-p
 COPY --from=build /app/dist ./dist
 
 RUN npm install -g pm2
-
-EXPOSE 5000
 

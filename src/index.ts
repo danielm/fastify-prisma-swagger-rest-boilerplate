@@ -1,15 +1,11 @@
-import fastify from 'fastify'
+import { main } from './app';
 
-const server = fastify()
+main()
+  .then(app => {
+    app.listen({ port: app.config.BIND_PORT, host: app.config.BIND_ADDR })
+      .then((addr) => {
+        console.log('Server setup ready, and waiting for connections', addr);
+      })
+  })
+  .catch(err => console.log(err))
 
-server.get('/ping', async (request, reply) => {
-  return 'pong\n'
-})
-
-server.listen({ port: 5000, host: '0.0.0.0' }, (err, address) => {
-  if (err) {
-    console.error(err)
-    process.exit(1)
-  }
-  console.log(`Server listening at ${address}`)
-})

@@ -4,7 +4,7 @@ services:
   web:
     build:
       target: production
-    command: pm2-runtime pm2.config.json
+    command: npm run docker:prod 
     labels:
       - "traefik.http.routers.${PROJECT_NAME}.entrypoints=websecure"
       - "traefik.http.routers.${PROJECT_NAME}.tls.certresolver=letsEncryptResolver"

@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
     container_name: ${PROJECT_NAME}-${NODE_ENV:-development}
     expose:
-      - "${APP_PORT:-5000}"
+      - "${BIND_PORT:-5000}"
     env_file:
       - ./.env
     labels:
