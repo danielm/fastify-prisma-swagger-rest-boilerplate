@@ -1,3 +1,33 @@
-# Yes
+# RESTfull APIs with Fastify JS
+..
 
-maybe, the start of something great
+## Features
+..
+
+## Install 
+..
+
+## Configuration
+..
+
+## Running locally
+..
+
+## File Structure
+..
+
+## Docker
+..
+
+### Makefile
+..
+
+### Development image
+..
+
+### Production image
+..
+
+## Debugging
+
+
