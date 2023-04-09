@@ -33,7 +33,10 @@
   },
   "homepage": "https://github.com/danielm/fastify-prisma-swagger-rest-boilerplate",
   "dependencies": {
+    "@fastify/compress": "^6.2.1",
+    "@fastify/cors": "^8.2.1",
     "@fastify/env": "^4.2.0",
+    "@fastify/helmet": "^10.1.0",
     "dotenv": "^16.0.3",
     "fastify": "^4.15.0"
   },
