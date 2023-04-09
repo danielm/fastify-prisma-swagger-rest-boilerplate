@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon -r dotenv/config src/index.ts",
     "build": "tsc -p tsconfig.json",
+    "debug": "nodemon --exec node -r dotenv/config --inspect=0.0.0.0:9229 -r ts-node/register src/index.ts",
     "docker:dev": "nodemon src/index.ts",
     "docker:prod": "pm2-runtime pm2.config.json",
     "test": "jest test"
