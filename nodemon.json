@@ -1,6 +1,10 @@
 {
   "watch": ["src"],
   "ext": "ts",
-  "ignore": ["node_modules", "dist", ".git"]
+  "ignore": ["node_modules", "dist", ".git"],
+  "restartable": "res",
+  "execMap": {
+    "ts": "node -r dotenv/config -r ts-node/register"
+  }
 }
 

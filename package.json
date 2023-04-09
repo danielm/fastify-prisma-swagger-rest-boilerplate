@@ -4,9 +4,9 @@
   "description": "Starting template to build Rest APIs, using Fastify, PrimsaJS and TypeScript. Provinding SwaggerUI for docs. Also, Blazingly fast (breh!)",
   "main": "src/index.ts",
   "scripts": {
-    "dev": "nodemon -r dotenv/config src/index.ts",
+    "dev": "nodemon --config nodemon.json src/index.ts",
     "build": "tsc -p tsconfig.json",
-    "debug": "nodemon --exec node -r dotenv/config --inspect=0.0.0.0:9229 -r ts-node/register src/index.ts",
+    "debug": "nodemon --config nodemon.json --inspect=0.0.0.0:9229 src/index.ts",
     "docker:dev": "nodemon src/index.ts",
     "docker:prod": "pm2-runtime pm2.config.json",
     "test": "jest test"
