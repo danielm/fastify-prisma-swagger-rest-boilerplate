@@ -17,6 +17,22 @@ services:
       - .:/app
 #     networks:
 #       - proxy
+  mongo:
+    image: mongo
+    restart: unless-stopped
+    container_name: mongo-${NODE_ENV:-dev}
+    # We only map these, in case we wanto to run the project locally
+    # If we going to use Docker even during dev, we can remove these
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodbdata:/data/db
+#     networks:
+#       - proxy
+
+volumes:
+  mongodbdata:
+    name: "${PROJECT_NAME}-mongo"
 
 # networks:
 #   proxy:
