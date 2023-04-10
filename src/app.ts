@@ -5,9 +5,9 @@ import fastifyCompress from '@fastify/compress';
 import fastifyHelmet from '@fastify/helmet';
 
 import envSchema from './lib/env.schema';
-import corsConfig from './lib/cors.config';
-import loggerConfig from './lib/logger.config';
-import compressConfig from './lib/compress.config';
+import corsConfig from './config/cors.config';
+import loggerConfig from './config/logger.config';
+import compressConfig from './config/compress.config';
 import prismaPlugin from './plugins/prisma.plugin';
 
 const main = async () => {

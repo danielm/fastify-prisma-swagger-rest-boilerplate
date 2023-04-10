@@ -22,8 +22,9 @@ services:
     image: bitnami/mongodb:latest
     restart: unless-stopped
     container_name: mongo-${NODE_ENV:-dev}
-    # We only map these, in case we wanto to run the project locally
+    # We only binding the port in case we wanto to run the project locally
     # If we going to use Docker even during dev, we can remove these
+    # For example: this allows to run stuff from our host, like npx prisma studio, seed db, etc..
     ports:
       - "27017:27017"
     environment:
