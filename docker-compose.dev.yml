@@ -18,13 +18,20 @@ services:
 #     networks:
 #       - proxy
   mongo:
-    image: mongo
+    # We setting up a Single Replica node, to allow transactions from Prisma
+    image: bitnami/mongodb:latest
     restart: unless-stopped
     container_name: mongo-${NODE_ENV:-dev}
     # We only map these, in case we wanto to run the project locally
     # If we going to use Docker even during dev, we can remove these
     ports:
       - "27017:27017"
+    environment:
+      - MONGODB_ROOT_USER=${MONGODB_USER}
+      - MONGODB_ROOT_PASSWORD=${MONGODB_PASSWORD}
+      - MONGODB_DATABASE=${PROJECT_NAME}
+      - MONGODB_REPLICA_SET_MODE=primary
+      - MONGODB_REPLICA_SET_KEY=${MONGODB_REPLICA_SET_KEY}
     volumes:
       - mongodbdata:/data/db
 #     networks:
