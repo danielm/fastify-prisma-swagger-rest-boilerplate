@@ -13,6 +13,8 @@ services:
       # .. and traefik just picks it up like magic
       # (but we need to set the network correclty, see bellow)
       - "${BIND_PORT}:${BIND_PORT}"
+      # Required to access prsma studio
+      - "5555:5555"
     volumes:
       - .:/app
 #     networks:
@@ -28,7 +30,7 @@ services:
     ports:
       - "27017:27017"
     environment:
-      - MONGODB_ROOT_USER=${MONGODB_USER}
+      - MONGODB_ROOT_USER=${MONGODB_USERNAME}
       - MONGODB_ROOT_PASSWORD=${MONGODB_PASSWORD}
       - MONGODB_DATABASE=${PROJECT_NAME}
       - MONGODB_REPLICA_SET_MODE=primary

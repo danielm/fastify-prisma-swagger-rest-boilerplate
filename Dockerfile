@@ -1,11 +1,19 @@
 # ---------------- To develop as a container
 FROM node:lts-alpine as development
 
+RUN apk add openssl1.1-compat
+
 WORKDIR /app
 
 COPY package*.json ./
 
 RUN npm install
+
+# RUN npx prisma generate
+
+# RUN npx prisma db push
+
+# RUN npx prisma seed
 
 COPY . .
 
