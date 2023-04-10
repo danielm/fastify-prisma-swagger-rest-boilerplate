@@ -4,11 +4,12 @@
 ## Features
 ..
 
+## Configuration
+..
+
 ## Install 
 ..
 
-## Configuration
-..
 
 ## Running locally
 ..
@@ -16,17 +17,6 @@
 ## File Structure
 ..
 
-## Docker
-..
-
-### Makefile
-..
-
-### Development image
-..
-
-### Production image
-..
 
 ## Debugging
 

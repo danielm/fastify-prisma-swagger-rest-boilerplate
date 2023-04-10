@@ -1,16 +1,24 @@
 version: '3'
 
 services:
-  web:
-    build:
-      context: ./
+  mongo:
+    # We setting up a Single Replica node, to allow transactions from Prisma
+    image: bitnami/mongodb:latest
     restart: unless-stopped
-    container_name: ${PROJECT_NAME}-${NODE_ENV:-development}
-    expose:
-      - "${BIND_PORT:-5000}"
-    env_file:
-      - ./.env
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.${PROJECT_NAME}.rule=Host(`${APP_SERVER_NAME}`)"
+    container_name: ${PROJECT_NAME}-mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGODB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD}
+      - MONGODB_ROOT_USER=${MONGODB_ROOT_USER}
+      - MONGODB_USERNAME=${MONGODB_USERNAME}
+      - MONGODB_PASSWORD=${MONGODB_PASSWORD}
+      - MONGODB_DATABASE=${PROJECT_NAME}
+      - MONGODB_REPLICA_SET_MODE=primary
+      - MONGODB_REPLICA_SET_KEY=${MONGODB_REPLICA_SET_KEY}
+    volumes:
+      - mongodbdata:/data/db
+volumes:
+  mongodbdata:
+    name: "${PROJECT_NAME}-mongo"
 
