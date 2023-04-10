@@ -6,19 +6,16 @@ services:
     image: bitnami/mongodb:latest
     restart: unless-stopped
     container_name: ${PROJECT_NAME}-mongo
+    # 2 way bind this port, so we can run npx prisma from host
     ports:
       - "27017:27017"
     environment:
       - MONGODB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD}
       - MONGODB_ROOT_USER=${MONGODB_ROOT_USER}
-      - MONGODB_USERNAME=${MONGODB_USERNAME}
-      - MONGODB_PASSWORD=${MONGODB_PASSWORD}
-      - MONGODB_DATABASE=${PROJECT_NAME}
       - MONGODB_REPLICA_SET_MODE=primary
       - MONGODB_REPLICA_SET_KEY=${MONGODB_REPLICA_SET_KEY}
     volumes:
-      - mongodbdata:/data/db
+      - mongodbdata:/bitnami/mongodb
 volumes:
   mongodbdata:
     name: "${PROJECT_NAME}-mongo"
-
