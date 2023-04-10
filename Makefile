@@ -15,7 +15,7 @@ start:
 ENV ?= dev
 
 down:
-	docker compose down
+	docker compose -f docker-compose.yml -f docker-compose.$(ENV).yml down
 
 logs:
 	docker compose logs web -f &
