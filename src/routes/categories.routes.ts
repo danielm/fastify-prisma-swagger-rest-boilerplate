@@ -10,7 +10,7 @@ const getCategoriesSchema = {
     200: {
       type: 'object',
       properties: {
-        results: { type: 'array', items: categorySchema, },
+        results: { type: 'array', items: categorySchema },
         page: { type: 'number' },
       }
     },
@@ -27,10 +27,11 @@ const getCategorySchema = {
   params: {
     type: 'object',
     properties: {
-      id: { type: 'string'/*, format: 'uuid'*/ },
+      id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
     },
     required: ['id'],
   },
+  querystring: paginationSchema.querystring,
   200: categorySchema,
   404: {
     type: 'object',

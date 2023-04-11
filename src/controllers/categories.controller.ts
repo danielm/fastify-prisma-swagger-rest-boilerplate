@@ -1,37 +1,55 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 
-type QueryListRequest = {
-  Querystring: { take: number; page: number; }
+interface PaginatorRequest {
+  Querystring: { take: number; from?: string; }
 }
 
 type QueryItemId = {
   id: string;
 }
 
-export async function getCategories(request: FastifyRequest<QueryListRequest>, reply: FastifyReply) {
-  const { take, page } = request.query;
+interface SingleRequest extends PaginatorRequest {
+  Params: QueryItemId;
+}
+
+export async function getCategories(request: FastifyRequest<PaginatorRequest>, reply: FastifyReply) {
+  const { take, from } = request.query;
 
   let results = await request.server.prisma.category.findMany({
-    skip: (page - 1) * take,
-    /*orderBy: [{ role: 'desc'}],*/
+    cursor: from ? { id: from } : undefined,
+    skip: from ? 1 : undefined,
+    take: take,
+    orderBy: {
+      id: 'desc',
+    }
   });
 
   if (results.length === 0) {
-    return reply.status(404).send({ message: "No elements to display" });
+    return reply.status(404).send({ message: "No elements found" });
   }
 
-  return reply.status(200).send({
-    results,
-    page,
-  });
+  return reply.status(200).send({ results });
 }
 
-export async function getCategory(request: FastifyRequest<{ Params: QueryItemId }>, reply: FastifyReply) {
+export async function getCategory(request: FastifyRequest<SingleRequest>, reply: FastifyReply) {
   const { id } = request.params;
+  const { take, from } = request.query;
 
   let category = await request.server.prisma.category.findUnique({
     where: { id },
-    // include: { products: true },
+    include: {
+      products: {
+        cursor: from ? { id: from } : undefined,
+        skip: from ? 1 : undefined,
+        take: take,
+        where: {
+          published: true,
+        },
+        orderBy: {
+          id: 'desc',
+        }
+      }
+    },
   });
 
   if (!category) {

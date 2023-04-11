@@ -7,11 +7,15 @@ export const paginationSchema = {
         enum: [5, 10, 25],
         default: 10,
       },
-      page: {
-        type: 'integer',
-        minimum: 1,
-        default: 1,
+      from: {
+        type: 'string',
+        pattern: '^[0-9a-fA-F]{24}$',
       },
+      // page: {
+      //   type: 'integer',
+      //   minimum: 1,
+      //   default: 1,
+      // },
     },
   },
 };
