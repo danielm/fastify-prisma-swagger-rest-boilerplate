@@ -13,6 +13,7 @@ import loggerConfig from './config/logger.config';
 import compressConfig from './config/compress.config';
 import prismaPlugin from './plugins/prisma.plugin';
 import helmetConfig from './config/helmet.config';
+import { swaggerConfig } from './config/swagger.config';
 
 import categoriesRoutes from './routes/categories.routes';
 import { messageSchema, paramIdSchema, paginationSchema } from './schema/common.schema';
@@ -28,7 +29,7 @@ const main = async () => {
   await app.register(fastifyHelmet, helmetConfig);
   await app.register(prismaPlugin);
 
-  // Json Schemas 
+  // Json Schemas
   app.addSchema(paginationSchema);
   app.addSchema(paramIdSchema);
   app.addSchema(messageSchema);
@@ -38,7 +39,7 @@ const main = async () => {
 
   // Swagger Docs
   if (app.config.ENABLE_DOCS) {
-    await app.register(fastifySwagger);
+    await app.register(fastifySwagger, swaggerConfig);
     await app.register(fastifySwaggerUi, {
       routePrefix: '/docs',
     });
@@ -49,7 +50,7 @@ const main = async () => {
     api.register(categoriesRoutes, { prefix: "/categories" });
     // api.register(productRoutes, { prefix: "/products" });
   }, { prefix: "/api/v1" });
- 
+
   return app;
 };
 

@@ -4,6 +4,8 @@ import { getCategories, getCategory } from "../controllers/categories.controller
 
 const getCategoriesSchema = {
   querystring: { $ref: 'paginationSchema' },
+  tags: ['categories'],
+  description: 'List all categories, paginated using a cursor paginator.',
   response: {
     200: {
       type: 'object',
@@ -18,6 +20,8 @@ const getCategoriesSchema = {
 const getCategorySchema = {
   params:{ $ref: 'paramIdSchema' },
   querystring: { $ref: 'paginationSchema' },
+  tags: ['categories'],
+  description: 'Get a single category, and its related Products (paginated, using a cursor paginator)',
   response: {
     200: { $ref: 'categorySchema#' },
     404: { $ref: 'messageResponseSchema#' },
