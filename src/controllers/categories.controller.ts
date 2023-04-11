@@ -1,27 +1,13 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 
-interface PaginatorRequest {
-  Querystring: { take: number; from?: string; }
-}
-
-type QueryItemId = {
-  id: string;
-}
-
-interface SingleRequest extends PaginatorRequest {
-  Params: QueryItemId;
-}
-
-export async function getCategories(request: FastifyRequest<PaginatorRequest>, reply: FastifyReply) {
+export async function getCategories(request: FastifyRequest<IPaginatorRequest>, reply: FastifyReply) {
   const { take, from } = request.query;
 
   let results = await request.server.prisma.category.findMany({
     cursor: from ? { id: from } : undefined,
     skip: from ? 1 : undefined,
     take: take,
-    orderBy: {
-      id: 'desc',
-    }
+    orderBy: { id: 'desc' }
   });
 
   if (results.length === 0) {
@@ -31,7 +17,7 @@ export async function getCategories(request: FastifyRequest<PaginatorRequest>, r
   return reply.status(200).send({ results });
 }
 
-export async function getCategory(request: FastifyRequest<SingleRequest>, reply: FastifyReply) {
+export async function getCategory(request: FastifyRequest<ISingleRequest>, reply: FastifyReply) {
   const { id } = request.params;
   const { take, from } = request.query;
 
@@ -42,12 +28,8 @@ export async function getCategory(request: FastifyRequest<SingleRequest>, reply:
         cursor: from ? { id: from } : undefined,
         skip: from ? 1 : undefined,
         take: take,
-        where: {
-          published: true,
-        },
-        orderBy: {
-          id: 'desc',
-        }
+        where: { published: true },
+        orderBy: { id: 'desc' }
       }
     },
   });

@@ -1,51 +1,34 @@
 import { FastifyInstance } from "fastify";
 
 import { getCategories, getCategory } from "../controllers/categories.controller";
-import { paginationSchema } from "../schema/pagination.schema";
-import { categorySchema } from "../schema/category.schema";
 
 const getCategoriesSchema = {
-  querystring: paginationSchema.querystring,
+  querystring: { $ref: 'paginationSchema' },
   response: {
     200: {
       type: 'object',
       properties: {
-        results: { type: 'array', items: categorySchema },
-        page: { type: 'number' },
+        results: { type: 'array', items: { $ref: 'categorySchema#' } },
       }
     },
-    404: {
-      type: 'object',
-      properties: {
-        message: { type: 'string' },
-      },
-    },
+    404: { $ref: 'messageResponseSchema#' },
   },
 };
 
 const getCategorySchema = {
-  params: {
-    type: 'object',
-    properties: {
-      id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
-    },
-    required: ['id'],
-  },
-  querystring: paginationSchema.querystring,
-  200: categorySchema,
-  404: {
-    type: 'object',
-    properties: {
-      message: { type: 'string' },
-    },
-  },
+  params:{ $ref: 'paramIdSchema' },
+  querystring: { $ref: 'paginationSchema' },
+  response: {
+    200: { $ref: 'categorySchema#' },
+    404: { $ref: 'messageResponseSchema#' },
+  }
 };
 
 export default async function (fastify: FastifyInstance) {
-  // List all
+  // List all categories, paginated
   fastify.get('/', { schema: getCategoriesSchema }, getCategories);
 
-  // Get one
+  // Get one category, and its products (paginated)
   fastify.get('/:id', { schema: getCategorySchema }, getCategory);
 
   // fastify.post<{ Body: PostBody }>('/example', { schema: postSchema }, async (request, reply) => {
