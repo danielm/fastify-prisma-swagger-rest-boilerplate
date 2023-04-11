@@ -23,6 +23,10 @@ const Config = {
       DATABASE_URL: {
         type: 'string'
       },
+      ENABLE_DOCS: {
+        type: 'boolean',
+        default: true
+      },
     }
   },
 };

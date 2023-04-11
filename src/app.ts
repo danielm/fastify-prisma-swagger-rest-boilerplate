@@ -4,6 +4,9 @@ import fastifyCors from '@fastify/cors';
 import fastifyCompress from '@fastify/compress';
 import fastifyHelmet from '@fastify/helmet';
 
+import fastifySwagger from '@fastify/swagger';
+import fastifySwaggerUi from '@fastify/swagger-ui';
+
 import envConfig from './lib/env.config';
 import corsConfig from './config/cors.config';
 import loggerConfig from './config/logger.config';
@@ -32,6 +35,14 @@ const main = async () => {
 
   app.addSchema(categorySchema);
   app.addSchema(productSchema);
+
+  // Swagger Docs
+  if (app.config.ENABLE_DOCS) {
+    await app.register(fastifySwagger);
+    await app.register(fastifySwaggerUi, {
+      routePrefix: '/docs',
+    });
+  }
 
   // API Endpoint routes
   await app.register(async api => {

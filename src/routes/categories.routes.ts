@@ -28,19 +28,7 @@ export default async function (fastify: FastifyInstance) {
   // List all categories, paginated
   fastify.get('/', { schema: getCategoriesSchema }, getCategories);
 
-  // Get one category, and its products (paginated)
+  // Get one category, and its published products (paginated)
   fastify.get('/:id', { schema: getCategorySchema }, getCategory);
-
-  // fastify.post<{ Body: PostBody }>('/example', { schema: postSchema }, async (request, reply) => {
-    // const { name } = request.body;
-
-    // const createdCategory = await prisma.category.create({
-    //   data: {
-    //     name,
-    //   },
-    // });
-
-    // reply.status(201).send(createdCategory);
-  // });
 }
 

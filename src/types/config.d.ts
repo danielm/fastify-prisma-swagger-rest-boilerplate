@@ -8,6 +8,8 @@ declare module 'fastify' {
       BIND_ADDR: string;
       PROJECT_NAME: string;
       APP_SERVER_NAME: string;
+      DATABASE_URL: string;
+      ENABLE_DOCS: boolean;
     };
   }
 }
