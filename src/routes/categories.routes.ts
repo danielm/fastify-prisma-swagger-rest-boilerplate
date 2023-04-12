@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
 
-import { getCategories, getCategory } from "../controllers/categories.controller";
+import { deleteCategory, getCategories, getCategory } from "../controllers/categories.controller";
 
 const getCategoriesSchema = {
   querystring: { $ref: 'paginationSchema' },
@@ -28,11 +28,28 @@ const getCategorySchema = {
   }
 };
 
+const deleteCategorySchema = {
+  params:{ $ref: 'paramIdSchema' },
+  tags: ['categories'],
+  description: 'Removes an especific cateory from the collection',
+  response: {
+    200: { $ref: 'messageResponseSchema#' },
+    404: { $ref: 'messageResponseSchema#' },
+  }
+};
+
 export default async function (fastify: FastifyInstance) {
   // List all categories, paginated
   fastify.get('/', { schema: getCategoriesSchema }, getCategories);
 
   // Get one category, and its published products (paginated)
   fastify.get('/:id', { schema: getCategorySchema }, getCategory);
+
+  // Deleteing a Category
+  fastify.delete('/:id', { schema: deleteCategorySchema }, deleteCategory);
+
+  // Create
+
+  // Update
 }
 

@@ -15,7 +15,7 @@ model Category {
   id         String     @id @default(auto()) @map("_id") @db.ObjectId
   name       String
   createdAt  DateTime   @default(now())
-  updatedAt  DateTime?  
+  updatedAt  DateTime?
   products   Product[]
 }
 
@@ -27,7 +27,7 @@ model Product {
   createdAt  DateTime   @default(now())
   updatedAt  DateTime?
 
-  category   Category   @relation(fields: [categoryId], references: [id])
-  categoryId String     @db.ObjectId
+  category   Category?   @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  categoryId String?     @db.ObjectId
 }
 

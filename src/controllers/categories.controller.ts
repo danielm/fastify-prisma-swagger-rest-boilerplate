@@ -6,7 +6,7 @@ export async function getCategories(request: FastifyRequest<IPaginatorRequest>, 
   let results = await request.server.prisma.category.findMany({
     cursor: from ? { id: from } : undefined,
     skip: from ? 1 : undefined,
-    take: take,
+    take,
     orderBy: { id: 'desc' }
   });
 
@@ -27,7 +27,7 @@ export async function getCategory(request: FastifyRequest<ISingleRequest>, reply
       products: {
         cursor: from ? { id: from } : undefined,
         skip: from ? 1 : undefined,
-        take: take,
+        take,
         where: { published: true },
         orderBy: { id: 'desc' }
       }
@@ -39,5 +39,15 @@ export async function getCategory(request: FastifyRequest<ISingleRequest>, reply
   }
 
   return reply.status(200).send(category);
+}
+
+export async function deleteCategory(request: FastifyRequest<ISingleRequest>, reply: FastifyReply) {
+  const { id } = request.params;
+
+  await request.server.prisma.category.delete({
+    where: { id },
+  });
+
+  return reply.status(202).send({ message: 'Category deleted' });
 }
 
