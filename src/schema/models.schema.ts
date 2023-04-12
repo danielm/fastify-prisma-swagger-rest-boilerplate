@@ -9,6 +9,7 @@ export const categorySchema = {
   $id: 'categorySchema',
   type: 'object',
   // required: ['name'],
+  nullable: true,
   properties: {
     id: { type: 'string' },
     name: { type: 'string' },

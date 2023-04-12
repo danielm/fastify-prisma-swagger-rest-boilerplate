@@ -7,7 +7,7 @@ export default async function (fastify: FastifyInstance) {
   // List all categories, paginated
   fastify.get('/', { schema: getAllSchema }, getCategories);
 
-  // Get one category, and its published products (paginated)
+  // Get one category
   fastify.get('/:id', { schema: getSchema }, getCategory);
 
   // Deleteing a Category

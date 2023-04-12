@@ -33,3 +33,23 @@ type PutCategory = {
   }
 }
 
+type PostProduct = {
+  Body: {
+    name: string;
+    published: boolean;
+    price: number;
+    categoryId: string;
+  }
+}
+
+type PutProduct = {
+  Body: {
+    name: string;
+    published: boolean;
+    price: number;
+    categoryId: string;
+  }
+  Params: {
+    id: string;
+  }
+}

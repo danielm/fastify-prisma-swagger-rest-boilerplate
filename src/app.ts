@@ -15,6 +15,7 @@ import prismaPlugin from './plugins/prisma.plugin';
 import helmetConfig from './config/helmet.config';
 import { swaggerConfig } from './config/swagger.config';
 
+import productsRoutes from './routes/products.routes';
 import categoriesRoutes from './routes/categories.routes';
 import { messageSchema, paramIdSchema, paginationSchema } from './schema/common.schema';
 import { categorySchema, productSchema } from './schema/models.schema';
@@ -48,7 +49,7 @@ const main = async () => {
   // API Endpoint routes
   await app.register(async api => {
     api.register(categoriesRoutes, { prefix: "/categories" });
-    // api.register(productRoutes, { prefix: "/products" });
+    api.register(productsRoutes, { prefix: "/products" });
   }, { prefix: "/api/v1" });
 
   return app;
