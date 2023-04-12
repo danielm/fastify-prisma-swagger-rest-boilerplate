@@ -5,24 +5,18 @@
 * - Query string
 */
 
-// VOY: convertir en types!!
-
-// interface IPaginatorRequest {
-type PaginatorRequest = {
-  // Querystring: { take: number; from?: string; }
-  take: number;
-  from?: string;
+type CrudAllRequest = {
+  Querystring: {
+    take: number;
+    from?: string;
+  }
 }
 
-// interface ISingleRequest extends IPaginatorRequest {
-type IdParamRequest = {
-  // Params: {
-  id: string;
-}
-
-/*
- * single ==> Params: IdParamRequest, Querystring: PaginatorRequest
- */
+type CrudIdRequest = {
+  Params: {
+    id: string;
+  }
+};
 
 type PostCategory = {
   Body: {
@@ -30,11 +24,6 @@ type PostCategory = {
   }
 }
 
-/*
- * IPostCategory ==> Body: PostCategoryBody
- */
-
-// interface IPutCategory extends IPostCategory {
 type PutCategory = {
   Body: {
     name: string;

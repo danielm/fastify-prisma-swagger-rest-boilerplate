@@ -28,9 +28,8 @@ export const getAllSchema = {
 // GET '/:id'
 export const getSchema = {
   params:{ $ref: 'paramIdSchema' },
-  querystring: { $ref: 'paginationSchema' },
   tags: ['categories'],
-  description: 'Get a single category, and its related Products (paginated, using a cursor paginator)',
+  description: 'Get a single category)',
   response: {
     200: { $ref: 'categorySchema#' },
     404: { $ref: 'messageResponseSchema#' },
