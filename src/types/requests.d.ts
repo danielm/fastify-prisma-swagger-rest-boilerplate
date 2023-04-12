@@ -8,3 +8,8 @@ interface ISingleRequest extends IPaginatorRequest {
   };
 }
 
+interface ICategoryForm {
+  Body: {
+    name: string;
+  }
+}
