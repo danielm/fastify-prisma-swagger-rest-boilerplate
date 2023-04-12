@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
 
-import { createCategory, deleteCategory, getCategories, getCategory } from "../controllers/categories.controller";
+import { createCategory, deleteCategory, getCategories, getCategory, updateCategory } from "../controllers/categories.controller";
 
 const getCategoriesSchema = {
   querystring: { $ref: 'paginationSchema' },
@@ -43,7 +43,18 @@ const createCategorySchema = {
   description: 'Creates a new Category',
   body: { $ref: 'categorySchema#' },
   response: {
-    200: { $ref: 'messageResponseSchema#' },
+    200: { $ref: 'categorySchema#' },
+    404: { $ref: 'messageResponseSchema#' },
+  }
+};
+
+const updateCategorySchema = {
+  tags: ['categories'],
+  description: 'Updates a Category',
+  body: { $ref: 'categorySchema#' },
+  params:{ $ref: 'paramIdSchema#' },
+  response: {
+    200: { $ref: 'categorySchema#' },
     404: { $ref: 'messageResponseSchema#' },
   }
 };
@@ -62,5 +73,6 @@ export default async function (fastify: FastifyInstance) {
   fastify.post('/', { schema: createCategorySchema }, createCategory);
 
   // Update
+  fastify.put('/:id', { schema: updateCategorySchema }, updateCategory);
 }
 

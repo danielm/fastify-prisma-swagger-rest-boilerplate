@@ -15,7 +15,7 @@ model Category {
   id         String     @id @default(auto()) @map("_id") @db.ObjectId
   name       String
   createdAt  DateTime   @default(now())
-  updatedAt  DateTime?
+  updatedAt  DateTime?  @updatedAt
   products   Product[]
 }
 
@@ -25,7 +25,7 @@ model Product {
   price      Float
   published  Boolean    @default(false)
   createdAt  DateTime   @default(now())
-  updatedAt  DateTime?
+  updatedAt  DateTime?  @updatedAt
 
   category   Category?   @relation(fields: [categoryId], references: [id], onDelete: SetNull)
   categoryId String?     @db.ObjectId

@@ -51,7 +51,7 @@ export async function deleteCategory(request: FastifyRequest<ISingleRequest>, re
   return reply.status(202).send({ message: 'Category deleted' });
 }
 
-export async function createCategory(request: FastifyRequest<ICategoryForm>, reply: FastifyReply) {
+export async function createCategory(request: FastifyRequest<IPostCategory>, reply: FastifyReply) {
   const { name } = request.body;
 
   let category = await request.server.prisma.category.create({
@@ -61,5 +61,18 @@ export async function createCategory(request: FastifyRequest<ICategoryForm>, rep
   });
 
   return reply.status(201).send(category);
+}
+
+export async function updateCategory(request: FastifyRequest<IPutCategory>, reply: FastifyReply) {
+  const { name } = request.body;
+  const { id } = request.params;
+
+  // TODO: updateAt date
+  let category = await request.server.prisma.category.update({
+    where: { id },
+    data: { name },
+  });
+
+  return reply.status(200).send(category);
 }
 

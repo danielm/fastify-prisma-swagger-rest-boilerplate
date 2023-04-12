@@ -8,8 +8,18 @@ interface ISingleRequest extends IPaginatorRequest {
   };
 }
 
-interface ICategoryForm {
+/*
+* Category Model CRUD
+*/
+interface IPostCategory {
   Body: {
     name: string;
   }
 }
+
+interface IPutCategory extends IPostCategory {
+  Params: {
+    id: string;
+  };
+}
+
