@@ -1,3 +1,11 @@
+/*
+* Simple global schemas that are going to be used across all of our app.
+*
+* See More: https://www.fastify.io/docs/latest/Reference/Validation-and-Serialization/
+*/
+
+// Cursor Pagination: take and from values.
+// - from must match the MongoDB document id pattern
 export const paginationSchema = {
   $id: 'paginationSchema',
   type: 'object',
@@ -14,6 +22,7 @@ export const paginationSchema = {
   },
 };
 
+// Just a single response object including a message
 export const messageSchema = {
   $id: 'messageResponseSchema',
   type: 'object',
@@ -22,6 +31,7 @@ export const messageSchema = {
   },
 };
 
+// Used to validate/match URLS that include an ':id' param
 export const paramIdSchema = {
   $id: 'paramIdSchema',
   type: 'object',

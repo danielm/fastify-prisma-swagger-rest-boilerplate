@@ -1,25 +1,46 @@
-interface IPaginatorRequest {
-  Querystring: { take: number; from?: string; }
+/*
+* Some types used mostly to extract data from:
+* - Request parameters
+* - POST body
+* - Query string
+*/
+
+// VOY: convertir en types!!
+
+// interface IPaginatorRequest {
+type PaginatorRequest = {
+  // Querystring: { take: number; from?: string; }
+  take: number;
+  from?: string;
 }
 
-interface ISingleRequest extends IPaginatorRequest {
-  Params: {
-    id: string;
-  };
+// interface ISingleRequest extends IPaginatorRequest {
+type IdParamRequest = {
+  // Params: {
+  id: string;
 }
 
 /*
-* Category Model CRUD
-*/
-interface IPostCategory {
+ * single ==> Params: IdParamRequest, Querystring: PaginatorRequest
+ */
+
+type PostCategory = {
   Body: {
     name: string;
   }
 }
 
-interface IPutCategory extends IPostCategory {
+/*
+ * IPostCategory ==> Body: PostCategoryBody
+ */
+
+// interface IPutCategory extends IPostCategory {
+type PutCategory = {
+  Body: {
+    name: string;
+  }
   Params: {
     id: string;
-  };
+  }
 }
 

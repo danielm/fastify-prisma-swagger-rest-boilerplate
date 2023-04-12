@@ -1,3 +1,15 @@
+/*
+* Schemas used for Validation and Validation and Serialization of our routes/endpoints
+*
+* These are used to:
+*  - Validate incoming requests (URL params, body, headers, query string)
+*  - Automatically serialize the response objects
+*  - Also, Swagger uses these schemas to generate the documentation!
+*
+* See More: https://www.fastify.io/docs/latest/Reference/Validation-and-Serialization/
+*/
+
+// GET '/'
 export const getAllSchema = {
   querystring: { $ref: 'paginationSchema' },
   tags: ['categories'],
@@ -13,6 +25,7 @@ export const getAllSchema = {
   },
 };
 
+// GET '/:id'
 export const getSchema = {
   params:{ $ref: 'paramIdSchema' },
   querystring: { $ref: 'paginationSchema' },
@@ -24,6 +37,7 @@ export const getSchema = {
   }
 };
 
+// DELETE '/:id'
 export const deleteSchema = {
   params:{ $ref: 'paramIdSchema' },
   tags: ['categories'],
@@ -34,6 +48,7 @@ export const deleteSchema = {
   }
 };
 
+// POST '/'
 export const createSchema = {
   tags: ['categories'],
   description: 'Creates a new Category',
@@ -50,9 +65,11 @@ export const createSchema = {
   }
 };
 
+// PUT: '/:id'
 export const updateSchema = {
   tags: ['categories'],
   description: 'Updates a Category',
+  params:{ $ref: 'paramIdSchema#' },
   body: {
     type: 'object',
     required: ['name'],
@@ -60,7 +77,6 @@ export const updateSchema = {
       name: { type: 'string' }
     }
   },
-  params:{ $ref: 'paramIdSchema#' },
   response: {
     200: { $ref: 'categorySchema#' },
     404: { $ref: 'messageResponseSchema#' },

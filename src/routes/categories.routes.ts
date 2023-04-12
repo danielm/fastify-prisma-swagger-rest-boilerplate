@@ -1,7 +1,7 @@
 import { FastifyInstance } from "fastify";
 
 import { createCategory, deleteCategory, getCategories, getCategory, updateCategory } from "../controllers/categories.controller";
-import { createSchema, deleteSchema, getAllSchema, getSchema, updateSchema } from "../schema/category.schema";
+import { createSchema, deleteSchema, getAllSchema, getSchema, updateSchema } from "../schema/categories.schema";
 
 export default async function (fastify: FastifyInstance) {
   // List all categories, paginated
@@ -13,10 +13,10 @@ export default async function (fastify: FastifyInstance) {
   // Deleteing a Category
   fastify.delete('/:id', { schema: deleteSchema }, deleteCategory);
 
-  // Create
+  // Create a new Category
   fastify.post('/', { schema: createSchema }, createCategory);
 
-  // Update
+  // Update an existing Category
   fastify.put('/:id', { schema: updateSchema }, updateCategory);
 }
 
