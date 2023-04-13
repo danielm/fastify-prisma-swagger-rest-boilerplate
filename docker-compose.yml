@@ -1,21 +1,13 @@
 version: '3'
 
 services:
-  mongo:
-    # We setting up a Single Replica node, to allow transactions from Prisma
-    image: bitnami/mongodb:latest
+  web:
+    build:
+      context: ./
     restart: unless-stopped
-    container_name: ${PROJECT_NAME}-mongo
-    # 2 way bind this port, so we can run npx prisma from host
-    ports:
-      - "27017:27017"
-    environment:
-      - MONGODB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD}
-      - MONGODB_ROOT_USER=${MONGODB_ROOT_USER}
-      - MONGODB_REPLICA_SET_MODE=primary
-      - MONGODB_REPLICA_SET_KEY=${MONGODB_REPLICA_SET_KEY}
-    volumes:
-      - mongodbdata:/bitnami/mongodb
-volumes:
-  mongodbdata:
-    name: "${PROJECT_NAME}-mongo"
+    container_name: ${PROJECT_NAME}-${NODE_ENV:-development}
+    expose:
+      - "${BIND_PORT:-5000}"
+    env_file:
+      - ./.env
+

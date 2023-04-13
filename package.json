@@ -7,6 +7,8 @@
     "start": "nodemon src/index.ts",
     "build": "tsc -p tsconfig.json",
     "debug": "nodemon --inspect=0.0.0.0:9229 src/index.ts",
+    "docker:dev": "nodemon src/index.ts",
+    "docker:prod": "pm2-runtime pm2.config.json",
     "test": "jest test"
   },
   "repository": {
