@@ -23,7 +23,7 @@ const Config = {
       DATABASE_URL: {
         type: 'string'
       },
-      ENABLE_DOCS: {
+      ENABLE_SWAGGER: {
         type: 'boolean',
         default: true
       },

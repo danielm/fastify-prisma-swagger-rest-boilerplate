@@ -39,7 +39,7 @@ const main = async () => {
   app.addSchema(productSchema);
 
   // Swagger Docs
-  if (app.config.ENABLE_DOCS) {
+  if (app.config.ENABLE_SWAGGER) {
     await app.register(fastifySwagger, swaggerConfig);
     await app.register(fastifySwaggerUi, {
       routePrefix: '/docs',
